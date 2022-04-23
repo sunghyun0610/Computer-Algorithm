@@ -16,5 +16,5 @@ by 201901671 문성현
 #### 간단한 그림 예시로 이해를 돕겠다.
 ![Alt text](https://github.com/sunghyun0610/Computer-Algorithm/blob/main/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%ED%94%8C%EB%A1%9C%EC%9A%B0.gif)
 <img width="100px" height="100px"></img>
-
+#### 위 사진에서 보이는 것과 같이 부평에서 10명을 보내면 인천대에서는 4명밖에 수용하지 못하기 때문에 성립되지않고 4명이하를 보내야 성립한다. 이를 네트워크에 적용해보면 간선들들 중 최소값이 흐를 수 있는 최대유량이 된다. 표현방식은 (유량=flow/용량=capacity)으로 표현한다.
 

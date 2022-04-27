@@ -3,13 +3,13 @@
 by 201901671 문성현
 -----------------------
 # List
-- 1.Ford-Fulkerson 알고리즘 개념 및 설명
-    - 1-1. 네트워크 플로우 알고리즘 목적과 소개
-    - 1-2. 용어 정리(사전지식) 및 특징
-    - 1-3. Ford-Fulkerson 알고리즘 설명
-- 2.Ford-Fulkerson 알고리즘 구현(C++) 및 동작방식 설명
-- 3.코드 결과 및 성능 분석
-- 4.개선점과 하면서 새로 배우고 느낀 점
+- **1.Ford-Fulkerson 알고리즘 개념 및 설명**
+    - *1-1. 네트워크 플로우 알고리즘 목적과 소개*
+    - *1-2. 용어 정리(사전지식) 및 특징*
+    - *1-3. Ford-Fulkerson 알고리즘 설명*
+- 2.**Ford-Fulkerson 알고리즘 구현(C++) 및 동작방식 설명**
+- **3.코드 결과 및 성능 분석**
+- **4.개선점과 하면서 새로 배우고 느낀 점**
 
 ## 1-1 네트워크 플로우 알고리즘 목적과 소개
 ### 정의: 네트워크 플로우(Network Flow)는 특정한 지점에서 다른 지점으로 데이터가 얼마나 많이 흐르고 있는가를 측정하는 알고리즘이다.
@@ -37,12 +37,15 @@ by 201901671 문성현
 ## 1.3 Ford-Fulkerson 알고리즘 설명
 #### 그림 예시와 함께 Ford-Fulkerson알고리즘을 이해해 보겠다.
 ![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow1.png)
-------
+***
 1. Source(출발점)에서 Sink(목적지)로 가는 경로를 찾는다.
     - 이떄 해당 경로에 반드시 용량이 남아 있어야 함.c(a,b)>f(a,b)
 ![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow2.png)
+경로 1)S->A->E->T를 찾았다.<br>경로를 찾는법은 정해져 있지 않다.(BFS:너비 우선 탐색 or DFS:깊이 우선 탐색 이용)
 -----
 2. 찾아낸 경로에 보낼 수 있는 최대 flow 찾는다.
     -최대 flow는 경로상에 간선들의 남은 용량의 최솟값이라고 첫번째 그림에서 설명한적 있다.
+    ![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow3.png)
+#### S->A->E->T에서 최대 flow=3.
 
  

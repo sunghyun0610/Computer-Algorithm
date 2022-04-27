@@ -58,6 +58,8 @@ by 201901671 문성현
 <br>![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow7.png)
 <br>즉 total 10이 되게 하려면:
 <br> A->E의 유량을 3->2가되게 하고, 남은 유량 1을 A->E->T로 흐르게 하면 된다.
+<br>이는 1.2-3번에서 설명한 유량의 대칭(음의 유량)을 이용하면 된다. 역간선이 존재한다 설정하고 다시한번 위의 (1~3)을 반복해보면
+<br>![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow12.png)
 
 
  

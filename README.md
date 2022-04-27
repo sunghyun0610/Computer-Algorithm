@@ -49,7 +49,15 @@ by 201901671 문성현
 <br>S->A->E->T에서 최대 flow=3.
 **<br>3. 찾아낸 경로에, 2에서 구한 최대 flow를 실제로 흘려보냄.**
 <br>![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow4.png)
-### 현재 sink(T)에 도달한 유량은 3.
+<br> 현재 sink(T)에 도달한 유량은 3.
+<br>**4. 경로를 더이상 찾지 못할때 까지 1~3과정 다시 반복한다**
+![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow6.png)
+<br>최종 sink(T)까지 도달한 유량은 "9"이다.
+<br>**5.실제 정답과 비교**
+<br> 하지만 실제 정답은9가아니다. S->A->E의 값을 2로 줄이고 S->A->D->T에 1유량을 흘려준다. 그러면 S->C->F->E->T에 추가로 1의 유량을 더 흘려보낼 수 있다. 즉 Total 10의 유량이 나오게된다.
+<br>![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow7.png)
+<br>즉 total 10이 되게 하려면:
+<br> A->E의 유량을 3->2가되게 하고, 남은 유량 1을 A->E->T로 흐르게 하면 된다.
 
 
  

@@ -41,11 +41,11 @@ by 201901671 문성현
 1. Source(출발점)에서 Sink(목적지)로 가는 경로를 찾는다.
     - 이떄 해당 경로에 반드시 용량이 남아 있어야 함.c(a,b)>f(a,b)
 ![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow2.png)
-경로 1)S->A->E->T를 찾았다.<br>경로를 찾는법은 정해져 있지 않다.(BFS:너비 우선 탐색 or DFS:깊이 우선 탐색 이용)
+<br>경로 1)S->A->E->T를 찾았다.<br>경로를 찾는법은 정해져 있지 않다.(BFS:너비 우선 탐색 or DFS:깊이 우선 탐색 이용)
 -----
 2. 찾아낸 경로에 보낼 수 있는 최대 flow 찾는다.
     -최대 flow는 경로상에 간선들의 남은 용량의 최솟값이라고 첫번째 그림에서 설명한적 있다.
-    ![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow3.png)
+    <br>![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow3.png)
 #### S->A->E->T에서 최대 flow=3.
 
  

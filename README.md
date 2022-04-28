@@ -160,5 +160,5 @@ int main(void){
 }//드디어 최대유량 10 구했다!//
 ```
 ## 결과 출력 화면
-
+![logo](https://github.com/sunghyun0610/Computer-Algorithm/blob/main/ford-fulkerson%20code/ford-fulkerson%20%EA%B2%B0%EA%B3%BC%ED%99%94%EB%A9%B4.png)
 

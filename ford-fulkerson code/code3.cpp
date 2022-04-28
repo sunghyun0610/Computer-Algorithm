@@ -5,36 +5,36 @@
 #define MAX 100
 #define INF 1000000000
 
-using namespace std;
-int n=8,result;
-int c[MAX][MAX],f[MAX][MAX],d[MAX];
+using namespace std;//C++ ¹®¹ýÀ» ¾´´Ù ¼±¾ð
+int n=8,result;//³ëµå°³¼ö 8°³ ¿Í ÃÖ´ëÀ¯·® °á°úº¯¼ö//
+int c[MAX][MAX],f[MAX][MAX],d[MAX];//c:capacity,f:flow,d:³ëµå ¹æ¹®Çß´ÂÁö È®ÀÎÇØÁÜ//
 vector<int> a[MAX];
-void maxFlow(int start, int end){
+void maxFlow(int begin, int end){
     while(1){
         fill(d,d+MAX,-1);
         queue<int> q;
-        q.push(start);
+        q.push(begin);
         while(!q.empty()){
             int x=q.front();
-            q.pop();
+            q.pop();//Å¥ ±¸Çö ÇÔ¼ö
             for(int i=0;i<a[x].size();i++){
                 int y=a[x][i];
-                if(c[x][y]-f[x][y]>0&&d[y]==-1){
+                if(c[x][y]-f[x][y]>0&&d[y]==-1){//¹æ¹®ÇÏÁö ¾ÊÀº ³ëµå Áß ¿ë·®ÀÌ ³²Àº°æ¿ì Å½»ö//
                     q.push(y);
-                    d[y]=x;
-                    if(y==end) break;
+                    d[y]=x;//°æ·Î¸¦ ÀúÀåÇÑ´Ù.//
+                    if(y==end) break;//µµÂøÁö¿¡ µµ´ÞÇÑ °æ¿ì//
                 }
             }
         }
         if(d[end]==-1) break;
         int flow=INF;
-        for(int i=end;i!=start;i=d[i]){
+        for(int i=end;i!=begin;i=d[i]){
             flow=min(flow,c[d[i]][i]-f[d[i]][i]);
-
+            //ÃÖ´ëÀ¯·® Ã£´Â ÇÔ¼ö min//
         }
-        for(int i=end;i!=start;i=d[i]){
+        for(int i=end;i!=begin;i=d[i]){
             f[d[i]][i]+=flow;
-            f[i][d[i]]-=flow;
+            f[i][d[i]]-=flow;//À½ÀÇ À¯·® °í·ÁÇØÁÖ±â!//
         }
         result+=flow;
     }
@@ -42,52 +42,53 @@ void maxFlow(int start, int end){
 
 int main(void){
     //S=1,A=2,B=3,C=4,D=5,E=6,F=7,T=8
+    //S->A:3
     a[1].push_back(2);
     a[2].push_back(1);
     c[1][2]=3;
-
+    //S->B:4
     a[1].push_back(3);
     a[3].push_back(1);
     c[1][3]=4;
-
+    //S->C:5
     a[1].push_back(4);
     a[4].push_back(1);
     c[1][4]=5;
-
+    //A->D:1
     a[2].push_back(5);
     a[5].push_back(2);
     c[2][5]=1;
-
+    //A->E:3
     a[2].push_back(6);
     a[6].push_back(2);
     c[2][6]=3;
-
+    //B->E:2
     a[3].push_back(6);
     a[6].push_back(3);
     c[3][6]=2;
-
+    //C->F:7
     a[4].push_back(7);
     a[7].push_back(4);
     c[4][7]=7;
-
+    //F->E:1
     a[7].push_back(6);
     a[6].push_back(7);
     c[7][6]=1;
-
+    //D->T:3
     a[5].push_back(8);
     a[8].push_back(5);
     c[5][8]=3;
-
+    //E->T:5
     a[6].push_back(8);
     a[8].push_back(6);
     c[6][8]=5;
-
+    //F->T:4
     a[7].push_back(8);
     a[8].push_back(7);
     c[7][8]=4;
 
     maxFlow(1,8);
-    printf("%d",result);
+    printf("ÃÖ´ë À¯·®:%d",result);
     return 0;
 
-}//ë“œë””ì–´ ìµœëŒ€ìœ ëŸ‰ 10 êµ¬í–ˆë‹¤!//
+}//µåµð¾î ÃÖ´ëÀ¯·® 10 ±¸Çß´Ù!//

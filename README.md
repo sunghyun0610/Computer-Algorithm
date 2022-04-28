@@ -163,6 +163,7 @@ int main(void){
 ```
 <br>위 그림에 맞게 입력해주면
 이상 코드끝.
+<br>코드 설명은 //주석으로 다써놓았다!
 <br>**3.코드 결과 및 성능 분석**
 ## 결과 출력 화면
 ![logo](https://github.com/sunghyun0610/Computer-Algorithm/blob/main/ford-fulkerson%20code/ford-fulkerson%20%EA%B2%B0%EA%B3%BC%ED%99%94%EB%A9%B4.png)

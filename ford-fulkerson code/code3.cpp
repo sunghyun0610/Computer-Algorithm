@@ -8,7 +8,7 @@
 using namespace std;//C++ 문법을 쓴다 선언
 int n=8,result;//노드개수 8개 와 최대유량 결과변수//
 int c[MAX][MAX],f[MAX][MAX],d[MAX];//c:capacity,f:flow,d:노드 방문했는지 확인해줌//
-vector<int> a[MAX];
+vector<int> a[MAX];//간선들 연결//
 void maxFlow(int begin, int end){
     while(1){
         fill(d,d+MAX,-1);
@@ -17,11 +17,11 @@ void maxFlow(int begin, int end){
         while(!q.empty()){
             int x=q.front();
             q.pop();//큐 구현 함수
-            for(int i=0;i<a[x].size();i++){
+            for(int i=0;i<a[x].size();i++){//너비우선탐색 !//
                 int y=a[x][i];
                 if(c[x][y]-f[x][y]>0&&d[y]==-1){//방문하지 않은 노드 중 용량이 남은경우 탐색//
                     q.push(y);
-                    d[y]=x;//경로를 저장한다.//
+                    d[y]=x;//경로를 저장한다!.//
                     if(y==end) break;//도착지에 도달한 경우//
                 }
             }

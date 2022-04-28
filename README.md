@@ -41,7 +41,7 @@ by 201901671 문성현
 **1. Source(출발점)에서 Sink(목적지)로 가는 경로를 찾는다.**
     <br>- 이떄 해당 경로에 반드시 용량이 남아 있어야 함.c(a,b)>f(a,b)
 ![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow2.png)
-### 경로 1)S->A->E->T를 찾았다.<br>경로를 찾는법은 정해져 있지 않다.(BFS:너비 우선 탐색 or DFS:깊이 우선 탐색 이용)
+### 경로 1)S->A->E->T를 찾았다.<br>경로를 찾는법은 정해져 있지 않다.(BFS사용: 에드먼 카프 , DFS사용:ford-fulkerson라한다.)
 -----
 **2. 찾아낸 경로에 보낼 수 있는 최대 flow 찾는다.**
     <br>-최대 flow는 경로상에 간선들의 남은 용량의 최솟값이라고 첫번째 그림에서 설명한적 있다.
@@ -73,7 +73,7 @@ by 201901671 문성현
 using namespace std;//C++ 문법을 쓴다 선언
 int n=8,result;//노드개수 8개 와 최대유량 결과변수//
 int c[MAX][MAX],f[MAX][MAX],d[MAX];//c:capacity,f:flow,d:노드 방문했는지 확인해줌//
-vector<int> a[MAX];
+vector<int> a[MAX];//간선들 연결//
 void maxFlow(int begin, int end){
     while(1){
         fill(d,d+MAX,-1);
@@ -82,11 +82,11 @@ void maxFlow(int begin, int end){
         while(!q.empty()){
             int x=q.front();
             q.pop();//큐 구현 함수
-            for(int i=0;i<a[x].size();i++){
+            for(int i=0;i<a[x].size();i++){ //너비우선탐색 !//
                 int y=a[x][i];
                 if(c[x][y]-f[x][y]>0&&d[y]==-1){//방문하지 않은 노드 중 용량이 남은경우 탐색//
                     q.push(y);
-                    d[y]=x;//경로를 저장한다.//
+                    d[y]=x;//경로를 저장한다!.//
                     if(y==end) break;//도착지에 도달한 경우//
                 }
             }
@@ -104,7 +104,7 @@ void maxFlow(int begin, int end){
         result+=flow;
     }
 }
-<br>
+<br>여기까지 큐(queue)를 이용해서 ford-fulkerson알고리즘 구현
 ```C++
 int main(void){
     //S=1,A=2,B=3,C=4,D=5,E=6,F=7,T=8
@@ -159,4 +159,6 @@ int main(void){
 
 }//드디어 최대유량 10 구했다!//
 ```
+## 결과 출력 화면
+
 

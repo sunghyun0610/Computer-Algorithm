@@ -62,6 +62,47 @@ by 201901671 문성현
 <br>![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow12.png)
 <br>역간선을 이용하면 S->C->F->E->A->D->T라는 새로운 증강경로를 찾을 수 있다. 1의 용량을 흘려보낼 수 있고,즉 최대유량은 10이된다.
 ## **2.Ford-Fulkerson 알고리즘 구현(C++) 및 동작방식 설명**
+```C++
+#include <iostream>
+#include <vector>
+#include <queue>
 
+#define MAX 100
+#define INF 1000000000
 
+using namespace std;
+int n=8,result;
+int c[MAX][MAX],f[MAX][MAX],d[MAX];
+vector<int> a[MAX];
+void maxFlow(int start, int end){
+    while(1){
+        fill(d,d+MAX,-1);
+        queue<int> q;
+        q.push(start);
+        while(!q.empty()){
+            int x=q.front();
+            q.pop();
+            for(int i=0;i<a[x].size();i++){
+                int y=a[x][i];
+                if(c[x][y]-f[x][y]>0&&d[y]==-1){
+                    q.push(y);
+                    d[y]=x;
+                    if(y==end) break;
+                }
+            }
+        }
+        if(d[end]==-1) break;
+        int flow=INF;
+        for(int i=end;i!=start;i=d[i]){
+            flow=min(flow,c[d[i]][i]-f[d[i]][i]);
+
+        }
+        for(int i=end;i!=start;i=d[i]){
+            f[d[i]][i]+=flow;
+            f[i][d[i]]-=flow;
+        }
+        result+=flow;
+    }
+}
+```
  

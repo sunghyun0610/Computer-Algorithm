@@ -227,4 +227,4 @@ int main(void){
   ```
   DFS를 이용해 ford-fulkerson구현 코드
   <br>출처 https://gseok.gitbooks.io/algorithm/content/b124-d2b8-c6cc-d06c-d50c-b85c-c6b0/d3ec-b4dc-d480-cee4-c2a828-ford-fulkerson-c560-b4dc-baac-b4dc-ce74-d50428-edmonds-karp.html
-  <br>감사합니다!^___^
+  <br>부족하지만 읽어주셔서 감사합니다!^___^ 이상 201901671 문성현.

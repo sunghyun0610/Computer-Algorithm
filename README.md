@@ -161,4 +161,7 @@ int main(void){
 ```
 ## 결과 출력 화면
 ![logo](https://github.com/sunghyun0610/Computer-Algorithm/blob/main/ford-fulkerson%20code/ford-fulkerson%20%EA%B2%B0%EA%B3%BC%ED%99%94%EB%A9%B4.png)
-
+<br>이상 코드끝.
+<br>**4.개선점과 하면서 느낀 점**
+<br>우선 네트워크 플로우 알고리즘의 대표적인 2가지 ford-fulkerson 알고리즘과 에드먼카프 알고리즘이 모두 최대 유량을 구하는 알고리즘인 것은 이해를 했다. 하지만 ford-fulkerson알고리즘은 DFS(깊이 우선탐색),에드먼카프 알고리즘은BFS(너비 우선탐색)으로만 해야하는 것인가 정확하지 않았다. 내가 구현한 코드는 BFS로 구현하였는데 그럼 이건 ford-fulkerson알고리즘이 아닌것인가..? 그래서 DFS방법으로도 구현해봤다. 이것은 혼자힘으로는 버거워서 구글코드를 인용하겠다.
+```

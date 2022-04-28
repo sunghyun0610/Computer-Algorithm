@@ -10,7 +10,7 @@ by 201901671 문성현
 - 2.**Ford-Fulkerson 알고리즘 구현(C++) 및 동작방식 설명**
 - **3.코드 결과 및 성능 분석**
 - **4.개선점과 하면서 새로 배우고 느낀 점**
-
+<br><br>
 ## 1-1 네트워크 플로우 알고리즘 목적과 소개
 ### 정의: 네트워크 플로우(Network Flow)는 특정한 지점에서 다른 지점으로 데이터가 얼마나 많이 흐르고 있는가를 측정하는 알고리즘이다.
 #### 간단한 그림 예시로 이해를 돕겠다.
@@ -61,6 +61,7 @@ by 201901671 문성현
 <br>이는 1.2-3번에서 설명한 유량의 대칭(음의 유량)을 이용하면 된다. 역간선이 존재한다 설정하고 다시한번 위의 (1~3)을 반복해보면
 <br>![logo](https://gseok.gitbooks.io/algorithm/content/assets/network-flow12.png)
 <br>역간선을 이용하면 S->C->F->E->A->D->T라는 새로운 증강경로를 찾을 수 있다. 1의 용량을 흘려보낼 수 있고,즉 최대유량은 10이된다.
+<br><br>
 ## **2.Ford-Fulkerson 알고리즘 구현(C++) 및 동작방식 설명**
 ```C++
 #include <iostream>
@@ -105,7 +106,7 @@ void maxFlow(int begin, int end){
     }
 }
 ```
-<br>여기까지 큐(queue)를 이용해서 ford-fulkerson알고리즘 구현
+<br>여기까지 큐(queue)를 이용해서 ford-fulkerson알고리즘함수 구현
 ```C++
 int main(void){
     //S=1,A=2,B=3,C=4,D=5,E=6,F=7,T=8
@@ -160,6 +161,7 @@ int main(void){
 
 }//드디어 최대유량 10 구했다!//
 ```
+<br>위 그림에 맞게 입력해주면
 이상 코드끝.
 <br>**3.코드 결과 및 성능 분석**
 ## 결과 출력 화면
@@ -169,7 +171,8 @@ int main(void){
 - 에드몬카프: O(VE^2)
 
 <br>**4.개선점과 하면서 느낀 점**
-<br>우선 네트워크 플로우 알고리즘의 대표적인 2가지 ford-fulkerson 알고리즘과 에드먼카프 알고리즘이 모두 최대 유량을 구하는 알고리즘인 것은 이해를 했다. 하지만 ford-fulkerson알고리즘은 DFS(깊이 우선탐색),에드먼카프 알고리즘은BFS(너비 우선탐색)으로만 해야하는 것인가 정확하지 않았다. 내가 구현한 코드는 BFS로 구현하였는데 그럼 이건 ford-fulkerson알고리즘이 아닌것인가..? 그래서 DFS방법으로도 구현해봤다. 이것은 혼자힘으로는 버거워서 구글코드를 인용하겠다.
+<br>우선 네트워크 플로우 알고리즘의 대표적인 2가지 ford-fulkerson 알고리즘과 에드먼카프 알고리즘이 모두 최대 유량을 구하는 알고리즘인 것은 이해를 했다. 
+<br>하지만 ford-fulkerson알고리즘은 DFS(깊이 우선탐색),에드먼카프 알고리즘은BFS(너비 우선탐색)으로만 해야하는 것인가 정확하지 않았다.<br> 내가 구현한 코드는 BFS로 구현하였는데 그럼 이건 ford-fulkerson알고리즘이 아닌것인가..? 그래서 DFS방법으로도 구현해봤다. 이것은 혼자힘으로는 버거워서 구글코드를 인용하겠다.
 ```
  public static int capacity[][];
     public static int flow[][];
@@ -225,6 +228,6 @@ int main(void){
         return total;
     }
   ```
-  DFS를 이용해 ford-fulkerson구현 코드
+  <br>DFS를 이용해 ford-fulkerson구현 코드
   <br>출처 https://gseok.gitbooks.io/algorithm/content/b124-d2b8-c6cc-d06c-d50c-b85c-c6b0/d3ec-b4dc-d480-cee4-c2a828-ford-fulkerson-c560-b4dc-baac-b4dc-ce74-d50428-edmonds-karp.html
-  <br>부족하지만 읽어주셔서 감사합니다!^___^ 이상 201901671 문성현.
+  <br>부족하지만 읽어주셔서 감사합니다!^___^ 이상 201901671 문성현 중간고사 ford-fulkerson 보고서 입니다.

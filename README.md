@@ -104,6 +104,7 @@ void maxFlow(int begin, int end){
         result+=flow;
     }
 }
+```
 <br>여기까지 큐(queue)를 이용해서 ford-fulkerson알고리즘 구현
 ```C++
 int main(void){
@@ -165,3 +166,59 @@ int main(void){
 <br>**4.개선점과 하면서 느낀 점**
 <br>우선 네트워크 플로우 알고리즘의 대표적인 2가지 ford-fulkerson 알고리즘과 에드먼카프 알고리즘이 모두 최대 유량을 구하는 알고리즘인 것은 이해를 했다. 하지만 ford-fulkerson알고리즘은 DFS(깊이 우선탐색),에드먼카프 알고리즘은BFS(너비 우선탐색)으로만 해야하는 것인가 정확하지 않았다. 내가 구현한 코드는 BFS로 구현하였는데 그럼 이건 ford-fulkerson알고리즘이 아닌것인가..? 그래서 DFS방법으로도 구현해봤다. 이것은 혼자힘으로는 버거워서 구글코드를 인용하겠다.
 ```
+ public static int capacity[][];
+    public static int flow[][];
+    public static int path[]; // 
+    public static boolean visited[];
+    public static LinkedList<Integer> graph[];
+
+    public static boolean dfs(int start) {
+        if (start == Sink) {
+            return true;
+        }
+
+        visited[start] = true;
+        LinkedList<Integer> nexts = graph[start];
+        for (int next: nexts) {
+            if ( !visited[next] && capacity[start][next] - flow[start][next] > 0) {
+                path[next] = start;
+
+                if (dfs(next)) { // 경로를 끝까지 찾으면 탈출, 아니면, 끝까지 찾기 재시도
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+     // O((V+E)F)
+    public static int FordFulkerson() {
+        int total = 0;
+        while (dfs(Source)) { // dfs로 경로 찾기(증가경로), 경로가 더이상 없으면 종료임.
+            // 찾은 경로에서 차단 간선 찾기 min (capacity[u][v] - flow[u][v])
+            // 결국 의미는 경로에서 흘릴수 있는 최대의 유량(flow)을 찾기
+            int flowNum = Integer.MAX_VALUE;
+            for(int i = Sink; i != Source; i = path[i]) {
+                int from = path[i];
+                int to = i;
+                flowNum = Math.min(flowNum, (capacity[from][to]) - flow[from][to]);
+            }
+            // 찾은 경로에 유량을 흘려보내기, 역방향도 반드시!!!!
+            for(int i = Sink; i != Source; i = path[i]) {
+                int from = path[i];
+                int to = i;
+
+                flow[from][to] += flowNum;
+                flow[to][from] -= flowNum;
+            }
+
+            total += flowNum;
+
+            // 찾은 경로를 초기화해서 dfs로 경로 찾기를 Source > Sink 까지 다시 할 수 있게 함.
+            Arrays.fill(path, -1);
+            Arrays.fill(visited, false);
+        }
+        return total;
+    }
+  ```
+  DFS를 이용해 ford-fulkerson구현 코드
+  출처 https://gseok.gitbooks.io/algorithm/content/b124-d2b8-c6cc-d06c-d50c-b85c-c6b0/d3ec-b4dc-d480-cee4-c2a828-ford-fulkerson-c560-b4dc-baac-b4dc-ce74-d50428-edmonds-karp.html

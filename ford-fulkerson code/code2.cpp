@@ -2,95 +2,85 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
-
-#define MAX 100
-#define INF 1000000000
-
-using namespace std;//C++ 문법을 쓴다 선언
-int n=8 ,result;//노드개수 8개 와 최대유량 결과변수//
-int c[MAX][MAX],f[MAX][MAX],d[MAX];//c:capacity,f:flow,d:노드 방문했는지 확인해줌//
-vector<int> a[MAX];
-void maxFlow(int start,int end){
-    while(1){
-        fill(d,d+MAX,-1);
-        queue<int> q;
-        q.push(start);
-        while(!q.empty()){
-            int x=q.front();
-            q.pop();
-            for(int i=0;i<a[x].size();i++){
-                int y=a[x][i];
-                if(c[x][y]-f[x][y]>0&&d[y]==-1){
-                    q.push(y);
-                    d[y]=x;
-                    if(y==end) break;
-                }
-            }
-        }
-        if(d[end]==-1) break;
-        int flow=INF;
-        for(int i=end;i !=start;i=d[i]){
-            flow=min(flow,c[d[i]][i]-f[d[i]][i]);
-        }
-        for(int i=end;i!=start;i=d[i]){
-            f[d[i]][i]+=flow;
-            f[i][d[i]]-=flow;
-        }
-        result+=flow;
-
-    }
+const int INF = 123456789;
+void set_graph(std::vector<std::vector<int>>& graph, const int u, const int v, const int c)
+{
+graph[u][v] = c;
+graph[v][u] = -c;
+}
+bool bfs(const int s, const int t, const int n, const std::vector<std::vector<int>>& graph, std::vector<int>& prev, std::vector<bool>& visited)
+{
+// init value
+for (int i = 0; i < n; i++)
+visited[i] = false;
+// create a queue for BFS
+std::queue<int> q;
+// mark s node as visited and enqueue it
+q.push(s);
+visited[s] = true;
+int u{};
+while (!q.empty()) {
+u = q.front();
+q.pop();
+// get adjacent vertices
+for (int v = 0; v < n; v++) {
+if (visited[v] == false && graph[u][v] > 0) {
+q.push(v);
+visited[v] = true;
+prev[v] = u;
+}
+}
+}
+return visited[t];
+}
+int edmonds_karp(const int source, const int sink, const int n, std::vector<std::vector<int>>& graph)
+{
+std::vector<bool> visited;
+std::vector<int> prev;
+// init value
+visited.resize(n, false);
+prev.resize(n, -1);
+int max_flow{ 0 };
+int path_flow{}, s{}, u{}, v{};
+while (bfs(source, sink, n, graph, prev, visited)) {
+path_flow = INF;
+// find minimum capacity of the edges along the path by BFS
+s = sink;
+while (s != source) {
+path_flow = std::min(path_flow, graph[prev[s]][s]);
+s = prev[s];
+}
+// add path flow to overall flow
+max_flow += path_flow;
+// update residual copacities of the edges and reverse edges along the path
+v = sink;
+while (v != source) {
+u = prev[v];
+graph[u][v] -= path_flow;
+graph[v][u] += path_flow;
+v = prev[v];
+}
+}
+return max_flow;
+}
+int main(int argc, char* argv[])
+{
+std::vector<std::vector<int>> graph;
+// set graph
+int n = 7; // source:0, sink:6
+graph.resize(n, std::vector<int>(n, 0));
+set_graph(graph, 0, 1, 2); // s-a
+set_graph(graph, 0, 2, 1); // s-b
+set_graph(graph, 0, 3, 4); // s-c
+set_graph(graph, 1, 4, 2); // a-d
+set_graph(graph, 2, 4, 1); // b-d
+set_graph(graph, 3, 5, 5); // c-e
+set_graph(graph, 4, 3, 1); // d-c
+set_graph(graph, 4, 5, 0); // d-e
+set_graph(graph, 4, 6, 2); // d-t
+set_graph(graph, 5, 6, 5); // e-t
+// start
+auto result = edmonds_karp(0, n - 1, n, graph);
+std::cout << "Maximum flow: " << result << "\n";
 }
 
-//S=1,A=2,B=3,C=4,D=5,E=6,F=7,T=8//
-int main(void){
-    //S->A :3
-    a[1].push_back(2);
-    a[2].push_back(1);
-    c[1][2]=3;
-    //S->B:4
-    a[1].push_back(3);
-    a[3].push_back(1);
-    c[1][3]=4;
-    //S->c:5
-    a[1].push_back(4);
-    a[4].push_back(1);
-    c[1][4]=5;
-    //A->D:1
-    a[2].push_back(5);
-    a[5].push_back(2);
-    c[2][5]=1;
-    //A->E :3
-    a[2].push_back(6);
-    a[6].push_back(2);
-    c[2][6]=3;
-    //B->E:2
-    a[3].push_back(6);
-    a[6].push_back(3);
-    c[3][6]=2;
-    //C->F:7
-    a[4].push_back(7);
-    a[7].push_back(4);
-    c[4][7]=7;
-    //D->T:3
-    a[5].push_back(8);
-    a[8].push_back(5);
-    a[5][8]=3;
-    //E->T:5
-    a[6].push_back(8);
-    a[8].push_back(6);
-    c[6][8]=5;
-    //F->E:1
-    a[7].push_back(6);
-    a[6].push_back(7);
-    c[7][6]=1;
-    //F->T:4
-    a[7].push_back(8);
-    a[8].push_back(7);
-    c[7][8]=4;
-
-
-    maxFlow(1,8);
-    printf("%d",result);
-    return 0;
-
-}
